@@ -427,7 +427,7 @@ function RFQTable({ rows, seller, onOpen, onAction }) {
       const estimatedValue = r.quote ? money(r.quote * (r.quantity / (r.unit === 'kg' ? 1000 : 1))) : '—';
       const quoteDisplay = r.quote ? `${money(r.quote)}/ton` : 'Awaiting quote';
       return (
-        <tr key={r.id} onClick={onOpen} className="click-row">
+        <tr key={r.id} onClick={() => onOpen(r)} className="click-row">
           <td><b>{r.material}</b><small>{r.id} · {r.category}</small></td>
           <td>{seller ? r.buyerCompany : r.sellerCompany}</td>
           <td>{r.quantity} {r.unit}</td>
@@ -1218,19 +1218,19 @@ function Modal({ modal, close, user, db, update, notify }) {
               <div><small>PACKAGING</small><b>{rfq.packaging}</b></div>
               <div><small>{user.role === 'seller' ? 'BUYER' : 'SELLER'}</small><b>{user.role === 'seller' ? rfq.buyerCompany : rfq.sellerCompany}</b></div>
               <div><small>RFQ ID</small><b>{rfq.id}</b></div>
-              <div><small>EXPIRES IN</small><b>{rfq.expiresIn || 7} days</b></div>
+              <div><small>EXPIRES IN</small><b>{rfq.expiresIn ? `${rfq.expiresIn} days` : 'No expiry set'}</b></div>
               <div><small>CREATED</small><b>{rfq.createdAt}</b></div>
             </div>
             <div className="detail-description">
               <small>MATERIAL DESCRIPTION</small>
               <p>{rfq.description || 'No additional description provided.'}</p>
-              {rfq.notes && <p><b>Seller note:</b> {rfq.notes}</p>}
+              <p><b>Seller note:</b> {rfq.notes || 'No additional notes provided.'}</p>
             </div>
             {rfq.quote && (
               <div className="quote-box">
                 <div>
                   <small>BUYER QUOTATION</small>
-                  <b>{money(rfq.quote)} <span>/ ton</span></b>
+                  <b>{money(rfq.quote)} <span>/{rfq.quoteUnit || 'ton'}</span></b>
                   <p>{rfq.quoteNote || 'No additional terms provided.'}</p>
                 </div>
                 {user.role === 'seller' && rfq.status === 'Quoted' && (
