@@ -11,7 +11,7 @@ import {
   Smartphone, Truck, Users, Wallet, X
 } from 'lucide-react';
 
-const KEY = 'w2v-platform-v1';
+const KEY = 'w2v-platform-v2';
 const money = n => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(Number(n || 0));
 const today = () => new Date().toISOString().slice(0, 10);
 const now = () => new Date().toISOString();
@@ -22,12 +22,41 @@ const seed = {
     { id: 'buyer-demo', name: 'Meera Kapoor', company: 'EcoPolymer Works', email: 'buyer@demo.com', password: 'demo123', role: 'buyer', location: 'Chandigarh, India', gstin: '04PQRSX5678K1Z2' }
   ],
   buyers: [
+    // Plastic buyers
     { id: 'b1', company: 'EcoPolymer Works', type: 'Plastic Recycler', location: 'Chandigarh', accepts: ['Plastic'], materials: ['PET', 'HDPE', 'LDPE'], min: 100, max: 10000, price: '₹18,000–₹24,000 / ton', rating: 4.8, verified: true, email: 'buyer@demo.com' },
+    { id: 'b7', company: 'GreenCycle Polymers', type: 'Plastic Processor', location: 'Mohali', accepts: ['Plastic'], materials: ['PET', 'PP', 'PS'], min: 200, max: 15000, price: '₹17,000–₹25,000 / ton', rating: 4.6, verified: true, email: 'greencycle@example.com' },
+    { id: 'b8', company: 'PlastiCycle India', type: 'Recycling Plant', location: 'Ludhiana', accepts: ['Plastic'], materials: ['HDPE', 'LDPE', 'PVC'], min: 500, max: 20000, price: '₹16,500–₹23,000 / ton', rating: 4.5, verified: true, email: 'plastic@example.com' },
+    { id: 'b9', company: 'ReForm Plastics', type: 'Circular Economy', location: 'Delhi NCR', accepts: ['Plastic'], materials: ['PET', 'HDPE', 'Mixed Plastics'], min: 1000, max: 50000, price: '₹19,000–₹26,000 / ton', rating: 4.7, verified: true, email: 'reform@example.com' },
+
+    // Metal Scraps buyers
     { id: 'b2', company: 'MetalLoop Foundry', type: 'Foundry', location: 'Mandi Gobindgarh', accepts: ['Metal Scraps'], materials: ['Aluminium', 'Copper', 'Iron'], min: 250, max: 20000, price: '₹32,000–₹48,000 / ton', rating: 4.7, verified: true, email: 'metal@example.com' },
+    { id: 'b10', company: 'SteelStrong Metals', type: 'Steel Mill', location: 'Jalandhar', accepts: ['Metal Scraps'], materials: ['Iron', 'Steel', 'Stainless Steel'], min: 1000, max: 100000, price: '₹28,000–₹38,000 / ton', rating: 4.6, verified: true, email: 'steelstrong@example.com' },
+    { id: 'b11', company: 'Alumix Alloys', type: 'Aluminium Smelter', location: 'Baddi', accepts: ['Metal Scraps'], materials: ['Aluminium', 'Aluminium Alloys'], min: 500, max: 25000, price: '₹1,40,000–₹1,80,000 / ton', rating: 4.8, verified: true, email: 'alumix@example.com' },
+    { id: 'b12', company: 'CopperCraft Industries', type: 'Copper Refiner', location: 'Panipat', accepts: ['Metal Scraps'], materials: ['Copper', 'Brass', 'Bronze'], min: 100, max: 10000, price: '₹5,50,000–₹7,00,000 / ton', rating: 4.9, verified: true, email: 'coppercraft@example.com' },
+
+    // Food Waste buyers
     { id: 'b3', company: 'Punjab BioEnergy', type: 'Biogas Plant', location: 'Patiala', accepts: ['Food Waste'], materials: ['Food waste', 'Organic residue'], min: 500, max: 50000, price: '₹2,000–₹5,000 / ton', rating: 4.6, verified: true, email: 'bio@example.com' },
+    { id: 'b13', company: 'OrganicLoop Fertilizers', type: 'Composting Facility', location: 'Sangrur', accepts: ['Food Waste'], materials: ['Food waste', 'Agricultural residue', 'Garden waste'], min: 200, max: 30000, price: '₹1,500–₹4,000 / ton', rating: 4.4, verified: true, email: 'organicloop@example.com' },
+    { id: 'b14', company: 'BioGas Punjab', type: 'Energy Recovery', location: 'Barnala', accepts: ['Food Waste'], materials: ['Food waste', 'Dairy waste', 'Poultry waste'], min: 1000, max: 80000, price: '₹2,500–₹5,500 / ton', rating: 4.5, verified: true, email: 'biogas@example.com' },
+    { id: 'b15', company: 'GreenEarth Organics', type: 'Vermicomposting', location: 'Ropar', accepts: ['Food Waste'], materials: ['Vegetable waste', 'Fruit waste', 'Market waste'], min: 100, max: 15000, price: '₹3,000–₹6,000 / ton', rating: 4.3, verified: true, email: 'greenearth@example.com' },
+
+    // Paper/Cardboard buyers
     { id: 'b4', company: 'RePaper Mills', type: 'Pulp Mill', location: 'Panipat', accepts: ['Paper/Cardboard'], materials: ['Cardboard', 'Kraft paper'], min: 200, max: 30000, price: '₹6,000–₹10,000 / ton', rating: 4.5, verified: true, email: 'paper@example.com' },
+    { id: 'b16', company: 'EcoPaper Solutions', type: 'Paper Recycler', location: 'Yamunanagar', accepts: ['Paper/Cardboard'], materials: ['Newspaper', 'Magazine', 'Office paper', 'Cardboard'], min: 500, max: 40000, price: '₹5,500–₹9,500 / ton', rating: 4.6, verified: true, email: 'ecopaper@example.com' },
+    { id: 'b17', company: 'FiberBoard Industries', type: 'Board Manufacturer', location: 'Karnal', accepts: ['Paper/Cardboard'], materials: ['Corrugated boxes', 'Kraft paper', 'Mixed paper'], min: 1000, max: 50000, price: '₹7,000–₹12,000 / ton', rating: 4.4, verified: true, email: 'fiberboard@example.com' },
+    { id: 'b18', company: 'PaperCycle Ltd', type: 'Tissue Manufacturer', location: 'Ambala', accepts: ['Paper/Cardboard'], materials: ['White paper', 'Printing waste', 'Cardboard'], min: 300, max: 25000, price: '₹8,000–₹14,000 / ton', rating: 4.7, verified: true, email: 'papercycle@example.com' },
+
+    // Textile buyers
     { id: 'b5', company: 'FiberLoop Textiles', type: 'Fiber Recycler', location: 'Amritsar', accepts: ['Textile'], materials: ['Cotton', 'Polyester'], min: 100, max: 8000, price: '₹8,000–₹16,000 / ton', rating: 4.4, verified: true, email: 'fiber@example.com' },
-    { id: 'b6', company: 'SolvPure Chemicals', type: 'Solvent Recovery', location: 'Baddi', accepts: ['Chemical Byproducts'], materials: ['Spent solvent', 'Process residue'], min: 50, max: 5000, price: 'Case dependent', rating: 4.9, verified: true, email: 'solv@example.com' }
+    { id: 'b19', company: 'ReThread India', type: 'Textile Upcycler', location: 'Ludhiana', accepts: ['Textile'], materials: ['Cotton', 'Wool', 'Mixed fibers', 'Denim'], min: 200, max: 15000, price: '₹10,000–₹20,000 / ton', rating: 4.5, verified: true, email: 'rethread@example.com' },
+    { id: 'b20', company: 'EcoWeave Fabrics', type: 'Fabric Manufacturer', location: 'Jalandhar', accepts: ['Textile'], materials: ['Polyester', 'Nylon', 'Blended fabrics'], min: 500, max: 30000, price: '₹12,000–₹25,000 / ton', rating: 4.3, verified: true, email: 'ecoweave@example.com' },
+    { id: 'b21', company: 'GreenStitch Recycling', type: 'Circular Fashion', location: 'Delhi NCR', accepts: ['Textile'], materials: ['Post-consumer textiles', 'Factory offcuts', 'Cotton', 'Polyester'], min: 1000, max: 40000, price: '₹9,000–₹18,000 / ton', rating: 4.6, verified: true, email: 'greenstitch@example.com' },
+
+    // Chemical Byproducts buyers
+    { id: 'b6', company: 'SolvPure Chemicals', type: 'Solvent Recovery', location: 'Baddi', accepts: ['Chemical Byproducts'], materials: ['Spent solvent', 'Process residue'], min: 50, max: 5000, price: 'Case dependent', rating: 4.9, verified: true, email: 'solv@example.com' },
+    { id: 'b22', company: 'ChemCycle Recovery', type: 'Chemical Recycler', location: 'Derabassi', accepts: ['Chemical Byproducts'], materials: ['Spent acids', 'Catalyst residues', 'Process liquids'], min: 100, max: 10000, price: 'Case dependent', rating: 4.7, verified: true, email: 'chemcycle@example.com' },
+    { id: 'b23', company: 'EcoChem Solutions', type: 'Waste Treatment', location: 'Panchkula', accepts: ['Chemical Byproducts'], materials: ['Organic solvents', 'Inorganic salts', 'Process waste'], min: 200, max: 15000, price: 'Case dependent', rating: 4.5, verified: true, email: 'ecochem@example.com' },
+    { id: 'b24', company: 'PureStream Industries', type: 'Resource Recovery', location: 'Mohali', accepts: ['Chemical Byproducts'], materials: ['Recovered solvents', 'Byproduct streams', 'Off-spec materials'], min: 500, max: 20000, price: 'Case dependent', rating: 4.8, verified: true, email: 'purestream@example.com' }
   ],
   rfqs: [
     { id: 'RFQ-1047', sellerId: 'seller-demo', sellerCompany: 'GreenCycle Industries', category: 'Plastic', material: 'PET Plastic', quantity: 500, unit: 'kg', packaging: 'Baled', description: 'Clean PET flakes, no contamination.', buyerId: 'b1', buyerCompany: 'EcoPolymer Works', status: 'Quoted', createdAt: '2026-10-28', quote: 21000, quoteNote: 'Subject to quality inspection', quoteUnit: 'ton' },
